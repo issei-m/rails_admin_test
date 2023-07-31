@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    environment:
+      - "RAILS_ASSET_HOST=//localhost:${WEBPACK_DEV_SERVER_PORT:-8080}"
+    ports:
+      - "${RAILS_SERVER_PORT:-3000}:3000"
+    volumes:
+      - .:/opt/app
+
+  assets:
+    build: .
+    command: bash -c "npm run serve"
+    environment:
+      - "WEBPACK_DEV_SERVER_PORT=${WEBPACK_DEV_SERVER_PORT:-8080}"
+    ports:
+      - "${WEBPACK_DEV_SERVER_PORT:-8080}:${WEBPACK_DEV_SERVER_PORT:-8080}"
+    volumes:
+      - .:/opt/app
