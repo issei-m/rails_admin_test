@@ -9,9 +9,11 @@ ENV LANG=C.UTF-8 \
 WORKDIR $RAILS_ROOT
 RUN <<EOF
 apt-get update -qq
-apt-get install -y build-essential
+apt-get install -y build-essential nodejs npm
 EOF
 COPY Gemfile* ./
 RUN bundle install
+COPY package* ./
+RUN npm ci
 COPY . ./
 CMD ["rails", "s", "-b", "0.0.0.0"]
