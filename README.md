@@ -1,4 +1,4 @@
-# RailsAdmin Test
+# RailsAdmin with webpack
 
 ```
 docker compose up -d
